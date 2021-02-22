@@ -14,11 +14,31 @@
           }
         });
 
-        AFRAME.registerComponent('continuebutton', {
-          init: function () {
-            this.el.addEventListener('click', function(e) {currentscene++})
-          }
-        });
+        // AFRAME.registerComponent('continuebutton', {
+        //   init: function () {
+        //     this.el.addEventListener('click', function(e) {currentscene++})
+        //   }
+        // });
+
+
+        AFRAME.registerComponent('button-interaction-handler', {
+        init: function () {
+          var skyEl = this.el.sceneEl.querySelector('#background');
+          
+          this.el.addEventListener('click', function () {
+            console.log("in...")
+            skyEl.setAttribute('src', '#background-1');  
+          });
+          
+          // this.el.addEventListener('mouseleave', function () {
+          //   console.log("out...")
+          //   skyEl.setAttribute('src', '#background-2');  
+
+          // });
+        }  
+      });
+
+
     </script>    
     <!-- Image link template to be reused. -->
     <script id="link" type="text/html">
@@ -56,26 +76,50 @@
           <audio id="VO-1" src="assets/audio/VO/VO1-welcome.wav" preload="auto"></audio>
         </a-assets>
 
-      <!-- 360-degree image. -->
-      <a-sky id="image-360" radius="10" src="#background-1"
-      animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
-      animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"></a-sky>
-      
+        <!-- 360-degree image. -->
+        <a-sky 
+          id="background" 
+          color="grey"
+          radius="10"
+          rotation="0 -80 0"
+          animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
+          animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade">
+        </a-sky>
   
       <a-text scenecount position="-2 2 -2" rotation="0 45 0"></a-text>
       
-      
-      <a-text value='Continue' continuebutton position="-1 0.5 -3" rotation="0 45 0"></a-text>
-      
+      <!-- Continue button -->
+      <a-plane button-interaction-handler position="3 3 -5" height="2" width="5" color="#E21D2D" >
+        <a-text 
+          value='Continue' 
+          scale="2 2 2" 
+          align="center"
+          event-set__mouseenter="_event: mouseenter; color: springgreen"
+          event-set__mouseleave="_event: mouseleave; color: black"
+        ></a-text>
+      </a-plane>
+
+
+
       <!-- Image links. -->
-      <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
+      <!-- <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
         <a-entity sound="src: #VO-1; on: click" template="src: #link" data-src="#background-1" data-thumb="#cubes-thumb"></a-entity>
         <a-entity template="src: #link" data-src="#background-2" data-thumb="#city-thumb"></a-entity>
         <a-entity template="src: #link" data-src="#background-3" data-thumb="#sechelt-thumb"></a-entity>
-      </a-entity>
+      </a-entity> -->
 
       <!-- Camera + cursor. -->
-      <a-entity camera look-controls>
+      <a-entity camera look-controls> 
+        <a-cursor 
+          id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__mouseenter="_event: mouseenter; color: springgreen"
+          event-set__mouseleave="_event: mouseleave; color: black"
+        ></a-cursor> 
+      </a-entity>
+
+      <!-- <a-entity camera look-controls>
         <a-cursor
           id="cursor"
           animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
@@ -83,8 +127,22 @@
           event-set__mouseenter="_event: mouseenter; color: springgreen"
           event-set__mouseleave="_event: mouseleave; color: black"
           raycaster="objects: .link"></a-cursor>
-      </a-entity>        
+      </a-entity>  
+       -->
+      
     </a-scene>
+
+    <script type="text/javascript">
+        // function nextScene() {
+        //   document.getElementById('scene-1').setAttribute('visible', 'false')
+        //   document.getElementById('scene-2').setAttribute('visible', 'true')
+        // }
+        // function prevScene() {
+        //   document.getElementById('scene-2').setAttribute('visible', 'false')
+        //   document.getElementById('scene-1').setAttribute('visible', 'true')
+        // }
+    </script>
+
   </body>
 </html>
 
