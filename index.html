@@ -24,13 +24,14 @@
       AFRAME.registerComponent("spot", {
         schema: {
           linkto: { type: "string", default: "" },
+          nextaudio: { type: "string", default: "" },
           spotgroup: { type: "string", default: "" },
         },
         init: function () {
           //add image source of hotspot icon
           this.el.setAttribute("src", "#hotspot");
           //make the icon look at the camera all the time
-          this.el.setAttribute("look-at", "#cam");
+          //this.el.setAttribute("look-at", "#cam");
 
           var data = this.data;
 
@@ -38,6 +39,15 @@
             //set the skybox source to the new image as per the spot
             var sky = document.getElementById("skybox");
             sky.setAttribute("src", data.linkto);
+
+            //set the voice over audio source to the new audio as per the spot
+            var audio = document.getElementById("audio");
+            audio.setAttribute(
+              "sound",
+              `src: #${data.nextaudio}; autoplay: true; loop: false`
+            );
+            console.log("data: ", data);
+            console.log("audio: ", audio);
 
             var spotcomp = document.getElementById("spots");
             var currspots = this.parentElement.getAttribute("id");
@@ -62,11 +72,60 @@
         ></audio>
         <!-- Audio -->
         <audio
-          id="VO-1"
+          id="sound1"
           src="assets/audio/VO/VO1-welcome.wav"
           preload="auto"
         ></audio>
 
+        <audio
+          id="sound2"
+          src="assets/audio/VO/VO2-changes.wav"
+          preload="auto"
+        ></audio>
+
+        <audio
+          id="sound3"
+          src="assets/audio/VO/VO3-handsan.wav"
+          preload="auto"
+        ></audio>
+
+        <audio
+          id="sound4"
+          src="assets/audio/VO/VO4-stairs.wav"
+          preload="auto"
+        ></audio>
+
+        <audio
+          id="sound5"
+          src="assets/audio/VO/VO5-canteen.wav"
+          preload="auto"
+        ></audio>
+
+        <audio
+          id="sound6"
+          src="assets/audio/VO/VO6-tables.wav"
+          preload="auto"
+        ></audio>
+
+        <audio
+          id="sound7"
+          src="assets/audio/VO/VO7-social.wav"
+          preload="auto"
+        ></audio>
+
+        <audio
+          id="sound8"
+          src="assets/audio/VO/VO8-cleaning.wav"
+          preload="auto"
+        ></audio>
+
+        <audio
+          id="sound9"
+          src="assets/audio/VO/VO9-updates.wav"
+          preload="auto"
+        ></audio>
+
+        <!-- 360 images -->
         <img id="point1" src="assets/images/360/1-welcome.jpg" preload="auto" />
         <img id="point2" src="assets/images/360/2-changes.jpg" preload="auto" />
         <img id="point3" src="assets/images/360/3-hand.jpg" preload="auto" />
@@ -92,7 +151,7 @@
         <!-- Scene 1 -->
         <a-entity id="group-point1">
           <a-image
-            spot="linkto:#point2;spotgroup:group-point2"
+            spot="linkto:#point2;spotgroup:group-point2;nextaudio:sound2"
             position="-4 0 10"
           ></a-image>
         </a-entity>
@@ -100,11 +159,11 @@
         <!-- Scene 2 -->
         <a-entity id="group-point2" scale="0 0 0">
           <a-image
-            spot="linkto:#point1;spotgroup:group-point1"
+            spot="linkto:#point1;spotgroup:group-point1;nextaudio:sound1"
             position="10 0 -8"
           ></a-image>
           <a-image
-            spot="linkto:#point3;spotgroup:group-point3"
+            spot="linkto:#point3;spotgroup:group-point3;nextaudio:sound3"
             position="0 0 10"
           ></a-image>
         </a-entity>
@@ -112,11 +171,11 @@
         <!-- Scene 3 -->
         <a-entity id="group-point3" scale="0 0 0">
           <a-image
-            spot="linkto:#point2;spotgroup:group-point2"
+            spot="linkto:#point2;spotgroup:group-point2;nextaudio:sound2"
             position="10 0 3"
           ></a-image>
           <a-image
-            spot="linkto:#point4;spotgroup:group-point4"
+            spot="linkto:#point4;spotgroup:group-point4;nextaudio:sound4"
             position="-10 0 -3"
           ></a-image>
         </a-entity>
@@ -124,11 +183,11 @@
         <!-- Scene 4 -->
         <a-entity id="group-point4" scale="0 0 0">
           <a-image
-            spot="linkto:#point3;spotgroup:group-point3"
+            spot="linkto:#point3;spotgroup:group-point3;nextaudio:sound3"
             position="0 0 -10"
           ></a-image>
           <a-image
-            spot="linkto:#point5;spotgroup:group-point5"
+            spot="linkto:#point5;spotgroup:group-point5;nextaudio:sound5"
             position="0 0 10"
           ></a-image>
         </a-entity>
@@ -136,11 +195,11 @@
         <!-- Scene 5 -->
         <a-entity id="group-point5" scale="0 0 0">
           <a-image
-            spot="linkto:#point4;spotgroup:group-point4"
+            spot="linkto:#point4;spotgroup:group-point4;nextaudio:sound4"
             position="0 0 10"
           ></a-image>
           <a-image
-            spot="linkto:#point6;spotgroup:group-point6"
+            spot="linkto:#point6;spotgroup:group-point6;nextaudio:sound6"
             position="0 0 -10"
           ></a-image>
         </a-entity>
@@ -148,11 +207,11 @@
         <!-- Scene 6 -->
         <a-entity id="group-point6" scale="0 0 0">
           <a-image
-            spot="linkto:#point5;spotgroup:group-point5"
+            spot="linkto:#point5;spotgroup:group-point5;nextaudio:sound5"
             position="0 0 -10"
           ></a-image>
           <a-image
-            spot="linkto:#point7;spotgroup:group-point7"
+            spot="linkto:#point7;spotgroup:group-point7;nextaudio:sound7"
             position="0 0 10"
           ></a-image>
         </a-entity>
@@ -160,11 +219,11 @@
         <!-- Scene 7 -->
         <a-entity id="group-point7" scale="0 0 0">
           <a-image
-            spot="linkto:#point6;spotgroup:group-point6"
+            spot="linkto:#point6;spotgroup:group-point6;nextaudio:sound6"
             position="0 0 -10"
           ></a-image>
           <a-image
-            spot="linkto:#point8;spotgroup:group-point8"
+            spot="linkto:#point8;spotgroup:group-point8;nextaudio:sound8"
             position="0 0 10"
           ></a-image>
         </a-entity>
@@ -172,11 +231,11 @@
         <!-- Scene 8 -->
         <a-entity id="group-point8" scale="0 0 0">
           <a-image
-            spot="linkto:#point7;spotgroup:group-point7"
+            spot="linkto:#point7;spotgroup:group-point7;nextaudio:sound7"
             position="0 0 10"
           ></a-image>
           <a-image
-            spot="linkto:#point9;spotgroup:group-point9"
+            spot="linkto:#point9;spotgroup:group-point9;nextaudio:sound9"
             position="0 0 -10"
           ></a-image>
         </a-entity>
@@ -184,11 +243,11 @@
         <!-- Scene 9 -->
         <a-entity id="group-point9" scale="0 0 0">
           <a-image
-            spot="linkto:#point8;spotgroup:group-point8"
+            spot="linkto:#point8;spotgroup:group-point8;nextaudio:sound8"
             position="0 0 -10"
           ></a-image>
           <a-image
-            spot="linkto:#point10;spotgroup:group-point10"
+            spot="linkto:#point10;spotgroup:group-point10;nextaudio:sound10"
             position="0 0 10"
           ></a-image>
         </a-entity>
@@ -196,7 +255,17 @@
         <!-- End buttons -->
       </a-entity>
 
+      <!-- 360 image -->
       <a-sky id="skybox" src="#point1"></a-sky>
+
+      <!-- Voice over audio -->
+      <a-entity
+        id="audio"
+        geometry="primitive: plane"
+        material="color: blue"
+        position="-10 0 0"
+        sound="src: #sound1; autoplay: true; loop: false"
+      ></a-entity>
 
       <a-entity id="cam" camera position="0 1.6 0" look-controls>
         <a-entity
