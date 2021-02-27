@@ -5,7 +5,10 @@
     <meta name="description" content="WebVR - Aframe - VR training at Hertz" />
     <meta name="author" content="Colin Sharkey - UX Designer & Developer" />
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script> -->
+    <!-- <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script> -->
+    <!-- <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script> -->
     <script>
       AFRAME.registerComponent("hotspots", {
         init: function () {
@@ -25,19 +28,16 @@
           linkto: { type: "string", default: "" },
           nextaudio: { type: "string", default: "" },
           spotgroup: { type: "string", default: "" },
+          imagerotation: { type: "string", default: "0 280 0" },
         },
         init: function () {
-          //add image source of hotspot icon
-          this.el.setAttribute("src", "#hotspot");
-          //make the icon look at the camera all the time
-          //this.el.setAttribute("look-at", "#cam");
-
           var data = this.data;
 
           this.el.addEventListener("click", function () {
             //set the skybox source to the new image as per the spot
             var sky = document.getElementById("skybox");
             sky.setAttribute("src", data.linkto);
+            sky.setAttribute("rotation", data.imagerotation);
 
             //set the voice over audio source to the new audio as per the spot
             var audio = document.getElementById("audio");
@@ -125,7 +125,12 @@
         ></audio>
 
         <!-- 360 images -->
-        <img id="point1" src="assets/images/360/1-splash.jpg" preload="auto" />
+        <img
+          id="point1"
+          src="assets/images/360/1-splash.jpg"
+          preload="auto"
+          rotation="0 64 0"
+        />
         <img id="point2" src="assets/images/360/2-welcome.jpg" preload="auto" />
         <img id="point3" src="assets/images/360/3-changes.jpg" preload="auto" />
         <img id="point4" src="assets/images/360/4-hand.jpg" preload="auto" />
@@ -143,116 +148,189 @@
           src="assets/images/360/10-updates.jpg"
           preload="auto"
         />
+        <img id="point11" src="assets/images/360/1-splash.jpg" preload="auto" />
 
-        <img
-          id="hotspot"
-          src="https://cdn.glitch.com/2087dfa6-bd02-4451-a189-36095a66f386%2Fup-arrow.png?1545397127546"
-        />
+        <img id="next" src="assets/images/icons/next.svg" />
+        <img id="back" src="assets/images/icons/back.svg" />
+        <img id="start" src="assets/images/icons/start.svg" />
       </a-assets>
 
       <!-- Next / Back buttons -->
       <a-entity id="spots" hotspots>
-        <!-- Scene 1 -->
+        <!-- Splash -->
         <a-entity id="group-point1">
           <a-image
-            spot="linkto:#point2;spotgroup:group-point2;nextaudio:sound2"
-            position="-4 0 10"
+            src="#start"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point2;spotgroup:group-point2;nextaudio:sound1;imagerotation:0 280 0"
+            position="4 2 -12"
           ></a-image>
         </a-entity>
 
-        <!-- Scene 2 -->
+        <!-- Scene 1 - Welcome -->
         <a-entity id="group-point2" scale="0 0 0">
           <a-image
-            spot="linkto:#point1;spotgroup:group-point1;nextaudio:sound1"
-            position="10 0 -8"
-          ></a-image>
-          <a-image
-            spot="linkto:#point3;spotgroup:group-point3;nextaudio:sound3"
-            position="0 0 10"
+            src="#next"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point3;spotgroup:group-point3;nextaudio:sound2;imagerotation:0 280 0"
+            position="1.5 0 -12"
           ></a-image>
         </a-entity>
 
-        <!-- Scene 3 -->
+        <!-- Scene 2 - Changes -->
         <a-entity id="group-point3" scale="0 0 0">
           <a-image
-            spot="linkto:#point2;spotgroup:group-point2;nextaudio:sound2"
-            position="10 0 3"
+            src="#back"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point2;spotgroup:group-point2;nextaudio:sound1;imagerotation:0 280 0"
+            position="-8 0 -11"
           ></a-image>
           <a-image
-            spot="linkto:#point4;spotgroup:group-point4;nextaudio:sound4"
-            position="-10 0 -3"
+            src="#next"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point4;spotgroup:group-point4;nextaudio:sound3;imagerotation:0 280 0"
+            position="-2 0 -11"
           ></a-image>
         </a-entity>
 
-        <!-- Scene 4 -->
+        <!-- Scene 3 - Hand sanatizer -->
         <a-entity id="group-point4" scale="0 0 0">
           <a-image
-            spot="linkto:#point3;spotgroup:group-point3;nextaudio:sound3"
-            position="0 0 -10"
+            src="#back"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point3;spotgroup:group-point3;nextaudio:sound2;imagerotation:0 280 0"
+            position="-8 0 -11"
           ></a-image>
           <a-image
-            spot="linkto:#point5;spotgroup:group-point5;nextaudio:sound5"
-            position="0 0 10"
+            src="#next"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point5;spotgroup:group-point5;nextaudio:sound4;imagerotation:0 280 0"
+            position="-2 0 -11"
           ></a-image>
         </a-entity>
 
-        <!-- Scene 5 -->
+        <!-- Scene 4 - Walking Direction / Stairs -->
         <a-entity id="group-point5" scale="0 0 0">
           <a-image
-            spot="linkto:#point4;spotgroup:group-point4;nextaudio:sound4"
-            position="0 0 10"
+            src="#back"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point4;spotgroup:group-point4;nextaudio:sound3;imagerotation:0 280 0"
+            position="-8 0 -11"
           ></a-image>
           <a-image
-            spot="linkto:#point6;spotgroup:group-point6;nextaudio:sound6"
-            position="0 0 -10"
+            src="#next"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point6;spotgroup:group-point6;nextaudio:sound5;imagerotation:0 280 0"
+            position="-2 0 -11"
           ></a-image>
         </a-entity>
 
-        <!-- Scene 6 -->
+        <!-- Scene 5 - Queuing in Canteen -->
         <a-entity id="group-point6" scale="0 0 0">
           <a-image
-            spot="linkto:#point5;spotgroup:group-point5;nextaudio:sound5"
-            position="0 0 -10"
+            src="#back"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point5;spotgroup:group-point5;nextaudio:sound4;imagerotation:0 280 0"
+            position="-8 0 -11"
           ></a-image>
           <a-image
-            spot="linkto:#point7;spotgroup:group-point7;nextaudio:sound7"
-            position="0 0 10"
+            src="#next"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point7;spotgroup:group-point7;nextaudio:sound6;imagerotation:0 280 0"
+            position="-2 0 -11"
           ></a-image>
         </a-entity>
 
-        <!-- Scene 7 -->
+        <!-- Scene 6 - Tables  / Spacing -->
         <a-entity id="group-point7" scale="0 0 0">
           <a-image
-            spot="linkto:#point6;spotgroup:group-point6;nextaudio:sound6"
-            position="0 0 -10"
+            src="#back"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point6;spotgroup:group-point6;nextaudio:sound5;imagerotation:0 280 0"
+            position="-8 0 -11"
           ></a-image>
           <a-image
-            spot="linkto:#point8;spotgroup:group-point8;nextaudio:sound8"
-            position="0 0 10"
+            src="#next"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point8;spotgroup:group-point8;nextaudio:sound7;imagerotation:0 280 0"
+            position="-2 0 -11"
           ></a-image>
         </a-entity>
 
-        <!-- Scene 8 -->
+        <!-- Scene 7 - Social areas -->
         <a-entity id="group-point8" scale="0 0 0">
           <a-image
-            spot="linkto:#point7;spotgroup:group-point7;nextaudio:sound7"
-            position="0 0 10"
+            src="#back"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point7;spotgroup:group-point7;nextaudio:sound6;imagerotation:0 280 0"
+            position="-8 0 -11"
           ></a-image>
           <a-image
-            spot="linkto:#point9;spotgroup:group-point9;nextaudio:sound9"
-            position="0 0 -10"
+            src="#next"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point9;spotgroup:group-point9;nextaudio:sound8;imagerotation:0 280 0"
+            position="-2 0 -11"
           ></a-image>
         </a-entity>
 
-        <!-- Scene 9 -->
+        <!-- Scene 8 - Cleaning -->
         <a-entity id="group-point9" scale="0 0 0">
           <a-image
-            spot="linkto:#point8;spotgroup:group-point8;nextaudio:sound8"
-            position="0 0 -10"
+            src="#back"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point8;spotgroup:group-point8;nextaudio:sound7;imagerotation:0 280 0"
+            position="-8 0 -11"
           ></a-image>
           <a-image
-            spot="linkto:#point10;spotgroup:group-point10;nextaudio:sound10"
-            position="0 0 10"
+            src="#next"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point10;spotgroup:group-point10;nextaudio:sound9;imagerotation:0 280 0"
+            position="-2 0 -11"
+          ></a-image>
+        </a-entity>
+
+        <!-- Scene 9 - Updates -->
+        <a-entity id="group-point10" scale="0 0 0">
+          <a-image
+            src="#back"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point9;spotgroup:group-point9;nextaudio:sound8;imagerotation:0 280 0"
+            position="-8 0 -11"
+          ></a-image>
+          <a-image
+            src="#next"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point11;spotgroup:group-point11;nextaudio:;imagerotation:0 280 0"
+            position="-2 0 -11"
+          ></a-image>
+        </a-entity>
+
+        <!-- Finished Screen -->
+        <a-entity id="group-point11" scale="0 0 0">
+          <a-image
+            src="#back"
+            look-at="#cam"
+            scale="3 1.5 0"
+            spot="linkto:#point10;spotgroup:group-point10;nextaudio:sound9;imagerotation:0 280 0"
+            position="-8 0 -11"
           ></a-image>
         </a-entity>
 
@@ -260,15 +338,21 @@
       </a-entity>
 
       <!-- 360 image -->
-      <a-sky id="skybox" src="#point1"></a-sky>
+      <a-sky
+        id="skybox"
+        position="0.82068 0 -3.67258"
+        src="#point1"
+        rotation="0 280 0"
+      ></a-sky>
 
       <!-- Voice over audio -->
       <a-entity
         id="audio"
+        visible="false"
         geometry="primitive: plane"
-        material="color: blue"
-        position="-10 0 0"
-        sound="src: #sound1; autoplay: true; loop: false"
+        material="color: #ffffff"
+        position="0.68894 0 -0.4605"
+        sound=""
       ></a-entity>
 
       <a-entity id="cam" camera position="0 1.6 0" look-controls>
@@ -277,12 +361,10 @@
           geometry="primitive:ring;radiusInner:0.02;radiusOuter:0.03"
           position="0 0 -1.8"
           material="shader:flat;color:green"
-        >
-          <!-- 
-                    animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
+          animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
           animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.1 0.1 0.1"
           animation__mouseenter="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1; loop:1"
-         -->
+        >
         </a-entity>
       </a-entity>
     </a-scene>
