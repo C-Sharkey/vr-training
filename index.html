@@ -4,11 +4,14 @@
     <title>Hertz VR Training</title>
     <meta name="description" content="WebVR - Aframe - VR training at Hertz" />
     <meta name="author" content="Colin Sharkey - UX Designer & Developer" />
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
-    <!-- <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script> -->
-    <!-- <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script> -->
-    <!-- <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script> -->
+    <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
+    <!-- UI buttons / container -->
+    <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
+
     <script>
       AFRAME.registerComponent("hotspots", {
         init: function () {
@@ -155,187 +158,483 @@
         <img id="start" src="assets/images/icons/start.svg" />
       </a-assets>
 
-      <!-- Next / Back buttons -->
-      <a-entity id="spots" hotspots>
-        <!-- Splash -->
-        <a-entity id="group-point1">
-          <a-image
-            src="#start"
-            look-at="#cam"
-            scale="3 1.5 0"
-            spot="linkto:#point2;spotgroup:group-point2;nextaudio:sound1;imagerotation:0 280 0"
-            position="4 2 -12"
-          ></a-image>
-        </a-entity>
+      <!-- 
+      ------------------------------------  
+        Start Scene 
+      ------------------------------------      
+      -->
 
-        <!-- Scene 1 - Welcome -->
-        <a-entity id="group-point2" scale="0 0 0">
-          <a-image
-            src="#next"
-            look-at="#cam"
-            scale="3 1.5 0"
+      <!-- Button Wrapper -->
+      <a-gui-flex-container
+        id="spots"
+        hotspots
+        flex-direction="row"
+        justify-content="center"
+        align-items="normal"
+        component-padding="0"
+        opacity="0.6"
+        width="12"
+        height="1.2"
+        panel-color="#000"
+        panel-rounded="0.2"
+        position="0 2.5 -6"
+        rotation="0 0 0"
+      >
+        <!-- First screen - Start -->
+        <a-gui-flex-container id="group-point1">
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Start"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
+            spot="linkto:#point2;spotgroup:group-point2;nextaudio:sound1;imagerotation:0 280 0"
+          >
+          </a-gui-button>
+        </a-gui-flex-container>
+
+        <!-- Scene 1 -->
+        <a-gui-flex-container id="group-point2" scale="0 0 0">
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Next"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point3;spotgroup:group-point3;nextaudio:sound2;imagerotation:0 280 0"
-            position="1.5 0 -12"
-          ></a-image>
-        </a-entity>
+          >
+          </a-gui-button>
+        </a-gui-flex-container>
+        <!-- End Scene 1 -->
 
-        <!-- Scene 2 - Changes -->
-        <a-entity id="group-point3" scale="0 0 0">
-          <a-image
-            src="#back"
-            look-at="#cam"
-            scale="3 1.5 0"
+        <!-- Scene 2 -->
+        <a-gui-flex-container id="group-point3" scale="0 0 0">
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Back"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point2;spotgroup:group-point2;nextaudio:sound1;imagerotation:0 280 0"
-            position="-8 0 -11"
-          ></a-image>
-          <a-image
-            src="#next"
-            look-at="#cam"
-            scale="3 1.5 0"
+          >
+          </a-gui-button>
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Next"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point4;spotgroup:group-point4;nextaudio:sound3;imagerotation:0 280 0"
-            position="-2 0 -11"
-          ></a-image>
-        </a-entity>
+          >
+          </a-gui-button>
+        </a-gui-flex-container>
+        <!-- End Scene 2 -->
 
-        <!-- Scene 3 - Hand sanatizer -->
-        <a-entity id="group-point4" scale="0 0 0">
-          <a-image
-            src="#back"
-            look-at="#cam"
-            scale="3 1.5 0"
+        <!-- Scene 3 -->
+        <a-gui-flex-container id="group-point4" scale="0 0 0">
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Back"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point3;spotgroup:group-point3;nextaudio:sound2;imagerotation:0 280 0"
-            position="-8 0 -11"
-          ></a-image>
-          <a-image
-            src="#next"
-            look-at="#cam"
-            scale="3 1.5 0"
+          >
+          </a-gui-button>
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Next"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point5;spotgroup:group-point5;nextaudio:sound4;imagerotation:0 280 0"
-            position="-2 0 -11"
-          ></a-image>
-        </a-entity>
+          >
+          </a-gui-button>
+        </a-gui-flex-container>
+        <!-- End Scene 3 -->
 
-        <!-- Scene 4 - Walking Direction / Stairs -->
-        <a-entity id="group-point5" scale="0 0 0">
-          <a-image
-            src="#back"
-            look-at="#cam"
-            scale="3 1.5 0"
+        <!-- Scene 4 -->
+        <a-gui-flex-container id="group-point5" scale="0 0 0">
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Back"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point4;spotgroup:group-point4;nextaudio:sound3;imagerotation:0 280 0"
-            position="-8 0 -11"
-          ></a-image>
-          <a-image
-            src="#next"
-            look-at="#cam"
-            scale="3 1.5 0"
+          >
+          </a-gui-button>
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Next"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point6;spotgroup:group-point6;nextaudio:sound5;imagerotation:0 280 0"
-            position="-2 0 -11"
-          ></a-image>
-        </a-entity>
+          >
+          </a-gui-button>
+        </a-gui-flex-container>
+        <!-- End Scene 4 -->
 
-        <!-- Scene 5 - Queuing in Canteen -->
-        <a-entity id="group-point6" scale="0 0 0">
-          <a-image
-            src="#back"
-            look-at="#cam"
-            scale="3 1.5 0"
+        <!-- Scene 5 -->
+        <a-gui-flex-container id="group-point6" scale="0 0 0">
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Back"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point5;spotgroup:group-point5;nextaudio:sound4;imagerotation:0 280 0"
-            position="-8 0 -11"
-          ></a-image>
-          <a-image
-            src="#next"
-            look-at="#cam"
-            scale="3 1.5 0"
+          >
+          </a-gui-button>
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Next"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point7;spotgroup:group-point7;nextaudio:sound6;imagerotation:0 280 0"
-            position="-2 0 -11"
-          ></a-image>
-        </a-entity>
+          >
+          </a-gui-button>
+        </a-gui-flex-container>
+        <!-- End Scene 5 -->
 
-        <!-- Scene 6 - Tables  / Spacing -->
-        <a-entity id="group-point7" scale="0 0 0">
-          <a-image
-            src="#back"
-            look-at="#cam"
-            scale="3 1.5 0"
+        <!-- Scene 6 -->
+        <a-gui-flex-container id="group-point7" scale="0 0 0">
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Back"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point6;spotgroup:group-point6;nextaudio:sound5;imagerotation:0 280 0"
-            position="-8 0 -11"
-          ></a-image>
-          <a-image
-            src="#next"
-            look-at="#cam"
-            scale="3 1.5 0"
+          >
+          </a-gui-button>
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Next"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point8;spotgroup:group-point8;nextaudio:sound7;imagerotation:0 280 0"
-            position="-2 0 -11"
-          ></a-image>
-        </a-entity>
+          >
+          </a-gui-button>
+        </a-gui-flex-container>
+        <!-- End Scene 6 -->
 
-        <!-- Scene 7 - Social areas -->
-        <a-entity id="group-point8" scale="0 0 0">
-          <a-image
-            src="#back"
-            look-at="#cam"
-            scale="3 1.5 0"
+        <!-- Scene 7 -->
+        <a-gui-flex-container id="group-point8" scale="0 0 0">
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Back"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point7;spotgroup:group-point7;nextaudio:sound6;imagerotation:0 280 0"
-            position="-8 0 -11"
-          ></a-image>
-          <a-image
-            src="#next"
-            look-at="#cam"
-            scale="3 1.5 0"
+          >
+          </a-gui-button>
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Next"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point9;spotgroup:group-point9;nextaudio:sound8;imagerotation:0 280 0"
-            position="-2 0 -11"
-          ></a-image>
-        </a-entity>
+          >
+          </a-gui-button>
+        </a-gui-flex-container>
+        <!-- End Scene 7 -->
 
-        <!-- Scene 8 - Cleaning -->
-        <a-entity id="group-point9" scale="0 0 0">
-          <a-image
-            src="#back"
-            look-at="#cam"
-            scale="3 1.5 0"
+        <!-- Scene 8 -->
+        <a-gui-flex-container id="group-point9" scale="0 0 0">
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Back"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point8;spotgroup:group-point8;nextaudio:sound7;imagerotation:0 280 0"
-            position="-8 0 -11"
-          ></a-image>
-          <a-image
-            src="#next"
-            look-at="#cam"
-            scale="3 1.5 0"
+          >
+          </a-gui-button>
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Next"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point10;spotgroup:group-point10;nextaudio:sound9;imagerotation:0 280 0"
-            position="-2 0 -11"
-          ></a-image>
-        </a-entity>
+          >
+          </a-gui-button>
+        </a-gui-flex-container>
+        <!-- End Scene 8 -->
 
-        <!-- Scene 9 - Updates -->
-        <a-entity id="group-point10" scale="0 0 0">
-          <a-image
-            src="#back"
-            look-at="#cam"
-            scale="3 1.5 0"
+        <!-- Scene 9 -->
+        <a-gui-flex-container id="group-point10" scale="0 0 0">
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Back"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point9;spotgroup:group-point9;nextaudio:sound8;imagerotation:0 280 0"
-            position="-8 0 -11"
-          ></a-image>
-          <a-image
-            src="#next"
-            look-at="#cam"
-            scale="3 1.5 0"
-            spot="linkto:#point11;spotgroup:group-point11;nextaudio:;imagerotation:0 280 0"
-            position="-2 0 -11"
-          ></a-image>
-        </a-entity>
+          >
+          </a-gui-button>
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Next"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
+            spot="linkto:#point1;spotgroup:group-point11;nextaudio:;imagerotation:0 280 0"
+          >
+          </a-gui-button>
+        </a-gui-flex-container>
+        <!-- End Scene 9 -->
 
         <!-- Finished Screen -->
-        <a-entity id="group-point11" scale="0 0 0">
-          <a-image
-            src="#back"
-            look-at="#cam"
-            scale="3 1.5 0"
+        <a-gui-flex-container id="group-point11" scale="0 0 0">
+          <a-gui-button
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="buttonActionFunction"
+            key-code="32"
+            value="Back"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#000"
+            focus-color="#000"
+            background-color="#FFD100"
             spot="linkto:#point10;spotgroup:group-point10;nextaudio:sound9;imagerotation:0 280 0"
-            position="-8 0 -11"
-          ></a-image>
-        </a-entity>
+          >
+          </a-gui-button>
+        </a-gui-flex-container>
+        <!-- End Scene 10 -->
 
-        <!-- End buttons -->
-      </a-entity>
+        <!-- End Button Wrapper -->
+      </a-gui-flex-container>
 
       <!-- 360 image -->
       <a-sky
@@ -355,7 +654,7 @@
         sound=""
       ></a-entity>
 
-      <a-entity id="cam" camera position="0 1.6 0" look-controls>
+      <!-- <a-entity id="cam" camera position="0 1.6 0" look-controls>
         <a-entity
           cursor="fuse:true;fuseTimeout:1500"
           geometry="primitive:ring;radiusInner:0.02;radiusOuter:0.03"
@@ -366,6 +665,26 @@
           animation__mouseenter="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1; loop:1"
         >
         </a-entity>
+      </a-entity> -->
+
+      <!-- Camera + cursor. -->
+      <a-entity id="cameraRig" position="0 1.6 0">
+        <a-camera look-controls position="0 0 0">
+          <a-gui-cursor
+            id="cursor"
+            raycaster="objects: [gui-interactable]"
+            fuse="true"
+            fuse-timeout="2000"
+            color="#ECEFF1"
+            hover-color="#CFD8DC"
+            active-color="#607D8B"
+            design="ring"
+          >
+            <!-- dot, ring, reticle, cross  -->
+          </a-gui-cursor>
+          <!-- /cursor -->
+        </a-camera>
+        <!-- /camera -->
       </a-entity>
     </a-scene>
   </body>
