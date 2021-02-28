@@ -48,8 +48,6 @@
               "sound",
               `src: #${data.nextaudio}; autoplay: true; loop: false`
             );
-            console.log("data: ", data);
-            console.log("audio: ", audio);
 
             var spotcomp = document.getElementById("spots");
             var currspots = this.parentElement.getAttribute("id");
@@ -64,64 +62,78 @@
     </script>
   </head>
   <body>
-    <a-scene background="color:#ECECEC">
-      <a-assets>
+    <a-scene
+      id="scene"
+      loading-screen="dotsColor: yellow; backgroundColor: black"
+      background="color:#ECECEC"
+    >
+      <a-assets timeout="10000">
         <!-- Mock assets -->
         <audio
+          preload="auto"
           id="click-sound"
           crossorigin="anonymous"
           src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"
         ></audio>
         <!-- Audio -->
         <audio
+          preload="auto"
           id="sound1"
           src="assets/audio/VO/VO1-welcome.wav"
           preload="auto"
         ></audio>
 
         <audio
+          preload="auto"
           id="sound2"
           src="assets/audio/VO/VO2-changes.wav"
           preload="auto"
         ></audio>
 
         <audio
+          preload="auto"
           id="sound3"
           src="assets/audio/VO/VO3-handsan.wav"
           preload="auto"
         ></audio>
 
         <audio
+          preload="auto"
           id="sound4"
           src="assets/audio/VO/VO4-stairs.wav"
           preload="auto"
         ></audio>
 
         <audio
+          preload="auto"
           id="sound5"
           src="assets/audio/VO/VO5-canteen.wav"
           preload="auto"
         ></audio>
 
         <audio
+          preload="auto"
           id="sound6"
           src="assets/audio/VO/VO6-tables.wav"
           preload="auto"
         ></audio>
 
         <audio
+          preload="auto"
           id="sound7"
           src="assets/audio/VO/VO7-social.wav"
           preload="auto"
         ></audio>
 
         <audio
+          preload="auto"
           id="sound8"
           src="assets/audio/VO/VO8-cleaning.wav"
           preload="auto"
         ></audio>
 
         <audio
+          preload="auto"
           id="sound9"
           src="assets/audio/VO/VO9-updates.wav"
           preload="auto"
@@ -151,13 +163,66 @@
           src="assets/images/360/10-updates.jpg"
           preload="auto"
         />
-        <img id="point11" src="assets/images/360/1-splash.jpg" preload="auto" />
+        <img
+          id="point11"
+          src="assets/images/360/11-finished.jpg"
+          preload="auto"
+        />
 
-        <img id="next" src="assets/images/icons/next.svg" />
-        <img id="back" src="assets/images/icons/back.svg" />
-        <img id="start" src="assets/images/icons/start.svg" />
+        <!-- Info Panels -->
+        <img
+          id="popup-1"
+          src="assets/images/popups/info-1.png"
+          preload="auto"
+        />
+        <img
+          id="popup-finished"
+          src="assets/images/popups/info-finished.jpg"
+          preload="auto"
+        />
+        <img
+          id="closebutton"
+          src="assets/images/icons/close-btn.png"
+          preload="auto"
+        />
       </a-assets>
+      <script>
+        // Check all assets are loaded
+        document
+          .querySelector("a-assets")
+          .addEventListener("loaded", function () {
+            console.log("ASSETS LOADED");
+          });
 
+        function popup(popupimage, position, scale, rotation) {
+          var popup = document.createElement("a-plane");
+          document.querySelector("a-scene").appendChild(popup);
+          popup.setAttribute("id", "infopanel");
+          popup.setAttribute("position", position);
+          popup.setAttribute("scale", scale);
+          popup.setAttribute("rotation", rotation);
+          popup.setAttribute("src", "#" + popupimage);
+          closebutton();
+        }
+
+        function closebutton() {
+          var closebutton = document.createElement("a-plane");
+          document.querySelector("a-scene").appendChild(closebutton);
+          closebutton.setAttribute("id", "closebutton");
+          closebutton.setAttribute("position", "1.35 2.5 -1.9");
+          closebutton.setAttribute("scale", "0.3 0.3 0");
+          closebutton.setAttribute("rotation", "0 0 0");
+          closebutton.setAttribute("src", "#closebutton");
+          closebutton.setAttribute("class", "spots");
+          // Remove Popup when X is clicked
+          closebutton.onclick = (e) => {
+            var el = document.getElementById("infopanel");
+            var btn = e.target;
+            el.remove();
+            btn.remove();
+          };
+        }
+      </script>
       <!-- 
       ------------------------------------  
         Start Scene 
@@ -165,24 +230,11 @@
       -->
 
       <!-- Button Wrapper -->
-      <a-gui-flex-container
-        id="spots"
-        hotspots
-        flex-direction="row"
-        justify-content="center"
-        align-items="normal"
-        component-padding="0"
-        opacity="0.6"
-        width="12"
-        height="1.2"
-        panel-color="#000"
-        panel-rounded="0.2"
-        position="0 2.5 -6"
-        rotation="0 0 0"
-      >
+      <a-entity id="spots" hotspots position="0 2.5 -6" rotation="0 0 0">
         <!-- First screen - Start -->
-        <a-gui-flex-container id="group-point1">
+        <a-entity id="group-point1">
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -203,17 +255,17 @@
             spot="linkto:#point2;spotgroup:group-point2;nextaudio:sound1;imagerotation:0 280 0"
           >
           </a-gui-button>
-        </a-gui-flex-container>
+        </a-entity>
 
         <!-- Scene 1 -->
-        <a-gui-flex-container id="group-point2" scale="0 0 0">
+        <a-entity id="group-point2" scale="0 0 0">
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
             key-code="32"
             value="Next"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -226,14 +278,39 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point3;spotgroup:group-point3;nextaudio:sound2;imagerotation:0 280 0"
+            position="1.8 -2.4 0"
           >
           </a-gui-button>
-        </a-gui-flex-container>
+
+          <a-gui-button
+            class="spots infobutton"
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="popup('popup-1', '0, 2, -2', '3.2 1.5 0', '0 0 0')"
+            key-code="32"
+            value="Info"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="white"
+            active-color="#006EB4"
+            hover-color="#40B5FF"
+            border-color="white"
+            focus-color="#000"
+            background-color="#0F96EC"
+            position="-1.8 -2.4 0"
+          >
+          </a-gui-button>
+        </a-entity>
         <!-- End Scene 1 -->
 
         <!-- Scene 2 -->
-        <a-gui-flex-container id="group-point3" scale="0 0 0">
+        <a-entity id="group-point3" scale="0 0 0">
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -252,9 +329,11 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point2;spotgroup:group-point2;nextaudio:sound1;imagerotation:0 280 0"
+            position="-1.8 -2.4 0"
           >
           </a-gui-button>
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -273,14 +352,16 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point4;spotgroup:group-point4;nextaudio:sound3;imagerotation:0 280 0"
+            position="1.8 -2.4 0"
           >
           </a-gui-button>
-        </a-gui-flex-container>
+        </a-entity>
         <!-- End Scene 2 -->
 
         <!-- Scene 3 -->
-        <a-gui-flex-container id="group-point4" scale="0 0 0">
+        <a-entity id="group-point4" scale="0 0 0">
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -299,9 +380,11 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point3;spotgroup:group-point3;nextaudio:sound2;imagerotation:0 280 0"
+            position="-1.8 -2.4 0"
           >
           </a-gui-button>
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -320,14 +403,16 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point5;spotgroup:group-point5;nextaudio:sound4;imagerotation:0 280 0"
+            position="1.8 -2.4 0"
           >
           </a-gui-button>
-        </a-gui-flex-container>
+        </a-entity>
         <!-- End Scene 3 -->
 
         <!-- Scene 4 -->
-        <a-gui-flex-container id="group-point5" scale="0 0 0">
+        <a-entity id="group-point5" scale="0 0 0">
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -346,9 +431,11 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point4;spotgroup:group-point4;nextaudio:sound3;imagerotation:0 280 0"
+            position="-1.8 -2.4 0"
           >
           </a-gui-button>
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -367,14 +454,16 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point6;spotgroup:group-point6;nextaudio:sound5;imagerotation:0 280 0"
+            position="1.8 -2.4 0"
           >
           </a-gui-button>
-        </a-gui-flex-container>
+        </a-entity>
         <!-- End Scene 4 -->
 
         <!-- Scene 5 -->
-        <a-gui-flex-container id="group-point6" scale="0 0 0">
+        <a-entity id="group-point6" scale="0 0 0">
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -393,9 +482,11 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point5;spotgroup:group-point5;nextaudio:sound4;imagerotation:0 280 0"
+            position="-1.8 -2.4 0"
           >
           </a-gui-button>
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -414,14 +505,16 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point7;spotgroup:group-point7;nextaudio:sound6;imagerotation:0 280 0"
+            position="1.8 -2.4 0"
           >
           </a-gui-button>
-        </a-gui-flex-container>
+        </a-entity>
         <!-- End Scene 5 -->
 
         <!-- Scene 6 -->
-        <a-gui-flex-container id="group-point7" scale="0 0 0">
+        <a-entity id="group-point7" scale="0 0 0">
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -440,9 +533,11 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point6;spotgroup:group-point6;nextaudio:sound5;imagerotation:0 280 0"
+            position="-1.8 -2.4 0"
           >
           </a-gui-button>
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -461,14 +556,16 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point8;spotgroup:group-point8;nextaudio:sound7;imagerotation:0 280 0"
+            position="1.8 -2.4 0"
           >
           </a-gui-button>
-        </a-gui-flex-container>
+        </a-entity>
         <!-- End Scene 6 -->
 
         <!-- Scene 7 -->
-        <a-gui-flex-container id="group-point8" scale="0 0 0">
+        <a-entity id="group-point8" scale="0 0 0">
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -487,9 +584,11 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point7;spotgroup:group-point7;nextaudio:sound6;imagerotation:0 280 0"
+            position="-1.8 -2.4 0"
           >
           </a-gui-button>
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -508,14 +607,16 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point9;spotgroup:group-point9;nextaudio:sound8;imagerotation:0 280 0"
+            position="1.8 -2.4 0"
           >
           </a-gui-button>
-        </a-gui-flex-container>
+        </a-entity>
         <!-- End Scene 7 -->
 
         <!-- Scene 8 -->
-        <a-gui-flex-container id="group-point9" scale="0 0 0">
+        <a-entity id="group-point9" scale="0 0 0">
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -534,9 +635,11 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point8;spotgroup:group-point8;nextaudio:sound7;imagerotation:0 280 0"
+            position="-1.8 -2.4 0"
           >
           </a-gui-button>
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -555,14 +658,16 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point10;spotgroup:group-point10;nextaudio:sound9;imagerotation:0 280 0"
+            position="1.8 -2.4 0"
           >
           </a-gui-button>
-        </a-gui-flex-container>
+        </a-entity>
         <!-- End Scene 8 -->
 
         <!-- Scene 9 -->
-        <a-gui-flex-container id="group-point10" scale="0 0 0">
+        <a-entity id="group-point10" scale="0 0 0">
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -581,9 +686,11 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point9;spotgroup:group-point9;nextaudio:sound8;imagerotation:0 280 0"
+            position="-1.8 -2.4 0"
           >
           </a-gui-button>
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -601,15 +708,25 @@
             border-color="#000"
             focus-color="#000"
             background-color="#FFD100"
-            spot="linkto:#point1;spotgroup:group-point11;nextaudio:;imagerotation:0 280 0"
+            spot="linkto:#point11;spotgroup:group-point11;nextaudio:;imagerotation:0 280 0"
+            position="1.8 -2.4 0"
           >
           </a-gui-button>
-        </a-gui-flex-container>
+        </a-entity>
         <!-- End Scene 9 -->
 
         <!-- Finished Screen -->
-        <a-gui-flex-container id="group-point11" scale="0 0 0">
+        <a-entity id="group-point11" scale="0 0 0">
+          <a-plane
+            id="finishedpanel"
+            position="0 1.2 -2"
+            scale="7 4.326 1"
+            rotation="0 0 0"
+            src="#popup-finished"
+          ></a-plane>
+
           <a-gui-button
+            class="spots"
             width="2.5"
             height="0.7"
             base-depth="0.025"
@@ -628,13 +745,14 @@
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point10;spotgroup:group-point10;nextaudio:sound9;imagerotation:0 280 0"
+            position="0 -2.4 0"
           >
           </a-gui-button>
-        </a-gui-flex-container>
+        </a-entity>
         <!-- End Scene 10 -->
 
         <!-- End Button Wrapper -->
-      </a-gui-flex-container>
+      </a-entity>
 
       <!-- 360 image -->
       <a-sky
@@ -654,25 +772,12 @@
         sound=""
       ></a-entity>
 
-      <!-- <a-entity id="cam" camera position="0 1.6 0" look-controls>
-        <a-entity
-          cursor="fuse:true;fuseTimeout:1500"
-          geometry="primitive:ring;radiusInner:0.02;radiusOuter:0.03"
-          position="0 0 -1.8"
-          material="shader:flat;color:green"
-          animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
-          animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.1 0.1 0.1"
-          animation__mouseenter="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1; loop:1"
-        >
-        </a-entity>
-      </a-entity> -->
-
       <!-- Camera + cursor. -->
       <a-entity id="cameraRig" position="0 1.6 0">
         <a-camera look-controls position="0 0 0">
           <a-gui-cursor
             id="cursor"
-            raycaster="objects: [gui-interactable]"
+            raycaster="objects: .spots"
             fuse="true"
             fuse-timeout="2000"
             color="#ECEFF1"
