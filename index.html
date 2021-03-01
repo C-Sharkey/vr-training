@@ -172,7 +172,29 @@
         <!-- Info Panels -->
         <img
           id="popup-1"
-          src="assets/images/popups/info-1.png"
+          src="assets/images/popups/Splash.jpg"
+          preload="auto"
+        />
+        <img
+          id="popup-2"
+          src="assets/images/popups/Signage.jpg"
+          preload="auto"
+        />
+        <img id="popup-3" src="assets/images/popups/Hand.jpg" preload="auto" />
+        <img id="popup-4" src="assets/images/popups/Left.jpg" preload="auto" />
+        <img
+          id="popup-5"
+          src="assets/images/popups/Facecovers.jpg"
+          preload="auto"
+        />
+        <img
+          id="popup-6"
+          src="assets/images/popups/Cleaning.jpg"
+          preload="auto"
+        />
+        <img
+          id="popup-7"
+          src="assets/images/popups/Updates.jpg"
           preload="auto"
         />
         <img
@@ -182,7 +204,7 @@
         />
         <img
           id="closebutton"
-          src="assets/images/icons/close-btn.png"
+          src="assets/images/icons/close-btn.jpg"
           preload="auto"
         />
       </a-assets>
@@ -233,6 +255,16 @@
       <a-entity id="spots" hotspots position="0 2.5 -6" rotation="0 0 0">
         <!-- First screen - Start -->
         <a-entity id="group-point1">
+          <!-- Info panel -->
+          <a-plane
+            id="splashpanel"
+            position="0 1.2 -2"
+            scale="7 4.326 1"
+            rotation="0 0 0"
+            src="#popup-1"
+          ></a-plane>
+
+          <!-- Start Button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -257,8 +289,9 @@
           </a-gui-button>
         </a-entity>
 
-        <!-- Scene 1 -->
+        <!-- Scene 1 - Welcome -->
         <a-entity id="group-point2" scale="0 0 0">
+          <!-- Next button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -281,7 +314,12 @@
             position="1.8 -2.4 0"
           >
           </a-gui-button>
+        </a-entity>
+        <!-- End Scene 1 -->
 
+        <!-- Scene 2 - Changes -->
+        <a-entity id="group-point3" scale="0 0 0">
+          <!-- Info Button -->
           <a-gui-button
             class="spots infobutton"
             width="2.5"
@@ -289,7 +327,7 @@
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="popup('popup-1', '0, 2, -2', '3.2 1.5 0', '0 0 0')"
+            onclick="popup('popup-2', '0, 2, -2', '3.2 1.5 0', '0 0 0')"
             key-code="32"
             value="Info"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -304,11 +342,8 @@
             position="-1.8 -2.4 0"
           >
           </a-gui-button>
-        </a-entity>
-        <!-- End Scene 1 -->
 
-        <!-- Scene 2 -->
-        <a-entity id="group-point3" scale="0 0 0">
+          <!-- Back button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -332,6 +367,8 @@
             position="-1.8 -2.4 0"
           >
           </a-gui-button>
+
+          <!-- Next Button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -358,8 +395,33 @@
         </a-entity>
         <!-- End Scene 2 -->
 
-        <!-- Scene 3 -->
+        <!-- Scene 3 - Hand Sanitiser -->
         <a-entity id="group-point4" scale="0 0 0">
+          <!-- Info Button -->
+          <a-gui-button
+            class="spots infobutton"
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="popup('popup-3', '0, 2, -2', '3.2 1.5 0', '0 0 0')"
+            key-code="32"
+            value="Info"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="white"
+            active-color="#006EB4"
+            hover-color="#40B5FF"
+            border-color="white"
+            focus-color="#000"
+            background-color="#0F96EC"
+            position="-1.8 -2.4 0"
+          >
+          </a-gui-button>
+
+          <!-- Back Button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -383,6 +445,8 @@
             position="-1.8 -2.4 0"
           >
           </a-gui-button>
+
+          <!-- Next Button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -409,8 +473,33 @@
         </a-entity>
         <!-- End Scene 3 -->
 
-        <!-- Scene 4 -->
+        <!-- Scene 4 - Stairs/Left  -->
         <a-entity id="group-point5" scale="0 0 0">
+          <!-- Info Button -->
+          <a-gui-button
+            class="spots infobutton"
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="popup('popup-4', '0, 2, -2', '3.2 1.5 0', '0 0 0')"
+            key-code="32"
+            value="Info"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="white"
+            active-color="#006EB4"
+            hover-color="#40B5FF"
+            border-color="white"
+            focus-color="#000"
+            background-color="#0F96EC"
+            position="-1.8 -2.4 0"
+          >
+          </a-gui-button>
+
+          <!-- Back Button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -434,6 +523,8 @@
             position="-1.8 -2.4 0"
           >
           </a-gui-button>
+
+          <!-- Next Button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -460,8 +551,9 @@
         </a-entity>
         <!-- End Scene 4 -->
 
-        <!-- Scene 5 -->
+        <!-- Scene 5 - Canteen -->
         <a-entity id="group-point6" scale="0 0 0">
+          <!-- Back Button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -485,6 +577,8 @@
             position="-1.8 -2.4 0"
           >
           </a-gui-button>
+
+          <!-- Next Button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -511,8 +605,9 @@
         </a-entity>
         <!-- End Scene 5 -->
 
-        <!-- Scene 6 -->
+        <!-- Scene 6 - Tables -->
         <a-entity id="group-point7" scale="0 0 0">
+          <!-- Back button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -536,6 +631,8 @@
             position="-1.8 -2.4 0"
           >
           </a-gui-button>
+
+          <!-- Next Button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -562,8 +659,33 @@
         </a-entity>
         <!-- End Scene 6 -->
 
-        <!-- Scene 7 -->
+        <!-- Scene 7 - Social/Face covering -->
         <a-entity id="group-point8" scale="0 0 0">
+          <!-- Info Button -->
+          <a-gui-button
+            class="spots infobutton"
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="popup('popup-5', '0, 2, -2', '3.2 1.5 0', '0 0 0')"
+            key-code="32"
+            value="Info"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="white"
+            active-color="#006EB4"
+            hover-color="#40B5FF"
+            border-color="white"
+            focus-color="#000"
+            background-color="#0F96EC"
+            position="-1.8 -2.4 0"
+          >
+          </a-gui-button>
+
+          <!-- Back button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -587,6 +709,8 @@
             position="-1.8 -2.4 0"
           >
           </a-gui-button>
+
+          <!-- Next button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -613,8 +737,33 @@
         </a-entity>
         <!-- End Scene 7 -->
 
-        <!-- Scene 8 -->
+        <!-- Scene 8 - Cleaning -->
         <a-entity id="group-point9" scale="0 0 0">
+          <!-- Info Button -->
+          <a-gui-button
+            class="spots infobutton"
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="popup('popup-6', '0, 2, -2', '3.2 1.5 0', '0 0 0')"
+            key-code="32"
+            value="Info"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="white"
+            active-color="#006EB4"
+            hover-color="#40B5FF"
+            border-color="white"
+            focus-color="#000"
+            background-color="#0F96EC"
+            position="-1.8 -2.4 0"
+          >
+          </a-gui-button>
+
+          <!-- Back button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -638,6 +787,8 @@
             position="-1.8 -2.4 0"
           >
           </a-gui-button>
+
+          <!-- Next Button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -664,8 +815,33 @@
         </a-entity>
         <!-- End Scene 8 -->
 
-        <!-- Scene 9 -->
+        <!-- Scene 9 - Updates -->
         <a-entity id="group-point10" scale="0 0 0">
+          <!-- Info Button -->
+          <a-gui-button
+            class="spots infobutton"
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="popup('popup-6', '0, 2, -2', '3.2 1.5 0', '0 0 0')"
+            key-code="32"
+            value="Info"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="white"
+            active-color="#006EB4"
+            hover-color="#40B5FF"
+            border-color="white"
+            focus-color="#000"
+            background-color="#0F96EC"
+            position="-1.8 -2.4 0"
+          >
+          </a-gui-button>
+
+          <!-- Back button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -689,6 +865,8 @@
             position="-1.8 -2.4 0"
           >
           </a-gui-button>
+
+          <!-- Next Button -->
           <a-gui-button
             class="spots"
             width="2.5"
@@ -717,6 +895,7 @@
 
         <!-- Finished Screen -->
         <a-entity id="group-point11" scale="0 0 0">
+          <!-- Info panel -->
           <a-plane
             id="finishedpanel"
             position="0 1.2 -2"
@@ -725,6 +904,7 @@
             src="#popup-finished"
           ></a-plane>
 
+          <!-- Back button -->
           <a-gui-button
             class="spots"
             width="2.5"
