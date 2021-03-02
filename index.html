@@ -67,7 +67,7 @@
       loading-screen="dotsColor: yellow; backgroundColor: black"
       background="color:#ECECEC"
     >
-      <a-assets timeout="10000">
+      <a-assets>
         <!-- Mock assets -->
         <audio
           preload="auto"
@@ -231,8 +231,8 @@
           var closebutton = document.createElement("a-plane");
           document.querySelector("a-scene").appendChild(closebutton);
           closebutton.setAttribute("id", "closebutton");
-          closebutton.setAttribute("position", "1.35 2.5 -1.9");
-          closebutton.setAttribute("scale", "0.3 0.3 0");
+          closebutton.setAttribute("position", "2.5 4 -5.9");
+          closebutton.setAttribute("scale", "0.5 0.5 0");
           closebutton.setAttribute("rotation", "0 0 0");
           closebutton.setAttribute("src", "#closebutton");
           closebutton.setAttribute("class", "spots");
@@ -244,6 +244,28 @@
             btn.remove();
           };
         }
+
+        function disablebuttons(audiotime) {
+          let buttonstodisable = document.querySelectorAll("a-gui-button");
+          Array.prototype.forEach.call(buttonstodisable, (button) => {
+            if (
+              button.classList.contains("next") ||
+              button.classList.contains("back")
+            ) {
+              button.classList.remove("spots");
+              button.setAttribute("background-color", "silver");
+              button.setAttribute("border-color", "silver");
+              enablebuttons(button, audiotime);
+            }
+          });
+        }
+        const enablebuttons = (button, audiotime) => {
+          setTimeout((audiotime) => {
+            button.classList.add("spots");
+            button.setAttribute("background-color", "#FFD100");
+            button.setAttribute("border-color", "#FFD100");
+          }, audiotime);
+        };
       </script>
       <!-- 
       ------------------------------------  
@@ -258,8 +280,8 @@
           <!-- Info panel -->
           <a-plane
             id="splashpanel"
-            position="0 1.2 -2"
-            scale="7 4.326 1"
+            position="0 0.7 0"
+            scale="8 4 1"
             rotation="0 0 0"
             src="#popup-1"
           ></a-plane>
@@ -272,7 +294,7 @@
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(14000)"
             key-code="32"
             value="Start"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -281,10 +303,11 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point2;spotgroup:group-point2;nextaudio:sound1;imagerotation:0 280 0"
+            position="0 -2 0"
           >
           </a-gui-button>
         </a-entity>
@@ -293,12 +316,13 @@
         <a-entity id="group-point2" scale="0 0 0">
           <!-- Next button -->
           <a-gui-button
-            class="spots"
+            class="spots next"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
+            onclick="disablebuttons(16000)"
             key-code="32"
             value="Next"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -307,7 +331,7 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point3;spotgroup:group-point3;nextaudio:sound2;imagerotation:0 280 0"
@@ -327,7 +351,7 @@
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="popup('popup-2', '0, 2, -2', '3.2 1.5 0', '0 0 0')"
+            onclick="popup('popup-2', '-1, 2.7, -6', '8 4 0', '0 0 0')"
             key-code="32"
             value="Info"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -336,22 +360,22 @@
             font-color="white"
             active-color="#006EB4"
             hover-color="#40B5FF"
-            border-color="white"
+            border-color="#0F96EC"
             focus-color="#000"
             background-color="#0F96EC"
-            position="-1.8 -2.4 0"
+            position="-1 -2.4 0"
           >
           </a-gui-button>
 
           <!-- Back button -->
           <a-gui-button
-            class="spots"
+            class="spots back"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(14000)"
             key-code="32"
             value="Back"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -360,23 +384,23 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point2;spotgroup:group-point2;nextaudio:sound1;imagerotation:0 280 0"
-            position="-1.8 -2.4 0"
+            position="-3.8 -2.4 0"
           >
           </a-gui-button>
 
           <!-- Next Button -->
           <a-gui-button
-            class="spots"
+            class="spots next"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(10000)"
             key-code="32"
             value="Next"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -385,7 +409,7 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point4;spotgroup:group-point4;nextaudio:sound3;imagerotation:0 280 0"
@@ -405,7 +429,7 @@
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="popup('popup-3', '0, 2, -2', '3.2 1.5 0', '0 0 0')"
+            onclick="popup('popup-3', '-1, 2.7, -6', '8 4 0', '0 0 0')"
             key-code="32"
             value="Info"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -414,22 +438,22 @@
             font-color="white"
             active-color="#006EB4"
             hover-color="#40B5FF"
-            border-color="white"
+            border-color="#0F96EC"
             focus-color="#000"
             background-color="#0F96EC"
-            position="-1.8 -2.4 0"
+            position="-1 -2.4 0"
           >
           </a-gui-button>
 
           <!-- Back Button -->
           <a-gui-button
-            class="spots"
+            class="spots back"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(10000)"
             key-code="32"
             value="Back"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -438,23 +462,23 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point3;spotgroup:group-point3;nextaudio:sound2;imagerotation:0 280 0"
-            position="-1.8 -2.4 0"
+            position="-3.8 -2.4 0"
           >
           </a-gui-button>
 
           <!-- Next Button -->
           <a-gui-button
-            class="spots"
+            class="spots next"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(19000)"
             key-code="32"
             value="Next"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -463,7 +487,7 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point5;spotgroup:group-point5;nextaudio:sound4;imagerotation:0 280 0"
@@ -483,7 +507,7 @@
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="popup('popup-4', '0, 2, -2', '3.2 1.5 0', '0 0 0')"
+            onclick="popup('popup-4', '-1, 2.7, -6', '8 4 0', '0 0 0')"
             key-code="32"
             value="Info"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -492,22 +516,22 @@
             font-color="white"
             active-color="#006EB4"
             hover-color="#40B5FF"
-            border-color="white"
+            border-color="#0F96EC"
             focus-color="#000"
             background-color="#0F96EC"
-            position="-1.8 -2.4 0"
+            position="-1 -2.4 0"
           >
           </a-gui-button>
 
           <!-- Back Button -->
           <a-gui-button
-            class="spots"
+            class="spots back"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(10000)"
             key-code="32"
             value="Back"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -516,23 +540,23 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point4;spotgroup:group-point4;nextaudio:sound3;imagerotation:0 280 0"
-            position="-1.8 -2.4 0"
+            position="-3.8 -2.4 0"
           >
           </a-gui-button>
 
           <!-- Next Button -->
           <a-gui-button
-            class="spots"
+            class="spots next"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(15000)"
             key-code="32"
             value="Next"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -541,7 +565,7 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point6;spotgroup:group-point6;nextaudio:sound5;imagerotation:0 280 0"
@@ -555,13 +579,13 @@
         <a-entity id="group-point6" scale="0 0 0">
           <!-- Back Button -->
           <a-gui-button
-            class="spots"
+            class="spots back"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(15000)"
             key-code="32"
             value="Back"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -570,7 +594,7 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point5;spotgroup:group-point5;nextaudio:sound4;imagerotation:0 280 0"
@@ -580,13 +604,13 @@
 
           <!-- Next Button -->
           <a-gui-button
-            class="spots"
+            class="spots next"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(9000)"
             key-code="32"
             value="Next"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -595,7 +619,7 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point7;spotgroup:group-point7;nextaudio:sound6;imagerotation:0 280 0"
@@ -609,13 +633,13 @@
         <a-entity id="group-point7" scale="0 0 0">
           <!-- Back button -->
           <a-gui-button
-            class="spots"
+            class="spots back"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(15000)"
             key-code="32"
             value="Back"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -624,7 +648,7 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point6;spotgroup:group-point6;nextaudio:sound5;imagerotation:0 280 0"
@@ -634,13 +658,13 @@
 
           <!-- Next Button -->
           <a-gui-button
-            class="spots"
+            class="spots next"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(12000)"
             key-code="32"
             value="Next"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -649,11 +673,11 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point8;spotgroup:group-point8;nextaudio:sound7;imagerotation:0 280 0"
-            position="1.8 -2.4 0"
+            position=" 1.8 -2.4 0"
           >
           </a-gui-button>
         </a-entity>
@@ -669,7 +693,7 @@
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="popup('popup-5', '0, 2, -2', '3.2 1.5 0', '0 0 0')"
+            onclick="popup('popup-5', '-1, 2.7, -6', '8 4 0', '0 0 0')"
             key-code="32"
             value="Info"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -678,22 +702,22 @@
             font-color="white"
             active-color="#006EB4"
             hover-color="#40B5FF"
-            border-color="white"
+            border-color="#0F96EC"
             focus-color="#000"
             background-color="#0F96EC"
-            position="-1.8 -2.4 0"
+            position="-1 -2.4 0"
           >
           </a-gui-button>
 
           <!-- Back button -->
           <a-gui-button
-            class="spots"
+            class="spots back"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(9000)"
             key-code="32"
             value="Back"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -702,23 +726,23 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point7;spotgroup:group-point7;nextaudio:sound6;imagerotation:0 280 0"
-            position="-1.8 -2.4 0"
+            position="-3.8 -2.4 0"
           >
           </a-gui-button>
 
           <!-- Next button -->
           <a-gui-button
-            class="spots"
+            class="spots next"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(24000)"
             key-code="32"
             value="Next"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -727,7 +751,7 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point9;spotgroup:group-point9;nextaudio:sound8;imagerotation:0 280 0"
@@ -747,7 +771,7 @@
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="popup('popup-6', '0, 2, -2', '3.2 1.5 0', '0 0 0')"
+            onclick="popup('popup-6', '-1, 2.7, -6', '8 4 0', '0 0 0')"
             key-code="32"
             value="Info"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -756,22 +780,22 @@
             font-color="white"
             active-color="#006EB4"
             hover-color="#40B5FF"
-            border-color="white"
+            border-color="#0F96EC"
             focus-color="#000"
             background-color="#0F96EC"
-            position="-1.8 -2.4 0"
+            position="-1 -2.4 0"
           >
           </a-gui-button>
 
           <!-- Back button -->
           <a-gui-button
-            class="spots"
+            class="spots back"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(12000)"
             key-code="32"
             value="Back"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -780,23 +804,23 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point8;spotgroup:group-point8;nextaudio:sound7;imagerotation:0 280 0"
-            position="-1.8 -2.4 0"
+            position="-3.8 -2.4 0"
           >
           </a-gui-button>
 
           <!-- Next Button -->
           <a-gui-button
-            class="spots"
+            class="spots next"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(20000)"
             key-code="32"
             value="Next"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -805,7 +829,7 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point10;spotgroup:group-point10;nextaudio:sound9;imagerotation:0 280 0"
@@ -825,7 +849,7 @@
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="popup('popup-6', '0, 2, -2', '3.2 1.5 0', '0 0 0')"
+            onclick="popup('popup-6', '-1, 2.7, -6', '8 4 0', '0 0 0')"
             key-code="32"
             value="Info"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -834,22 +858,22 @@
             font-color="white"
             active-color="#006EB4"
             hover-color="#40B5FF"
-            border-color="white"
+            border-color="#0F96EC"
             focus-color="#000"
             background-color="#0F96EC"
-            position="-1.8 -2.4 0"
+            position="-1 -2.4 0"
           >
           </a-gui-button>
 
           <!-- Back button -->
           <a-gui-button
-            class="spots"
+            class="spots back"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(24000)"
             key-code="32"
             value="Back"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -858,23 +882,22 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point9;spotgroup:group-point9;nextaudio:sound8;imagerotation:0 280 0"
-            position="-1.8 -2.4 0"
+            position="-3.8 -2.4 0"
           >
           </a-gui-button>
 
           <!-- Next Button -->
           <a-gui-button
-            class="spots"
+            class="spots next"
             width="2.5"
             height="0.7"
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
             key-code="32"
             value="Next"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -883,7 +906,7 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point11;spotgroup:group-point11;nextaudio:;imagerotation:0 280 0"
@@ -898,8 +921,8 @@
           <!-- Info panel -->
           <a-plane
             id="finishedpanel"
-            position="0 1.2 -2"
-            scale="7 4.326 1"
+            position="0 0.7 0"
+            scale="8 4 1"
             rotation="0 0 0"
             src="#popup-finished"
           ></a-plane>
@@ -912,7 +935,7 @@
             base-depth="0.025"
             depth="0.1"
             gap="0.1"
-            onclick="buttonActionFunction"
+            onclick="disablebuttons(20000)"
             key-code="32"
             value="Back"
             font-family="assets/fonts/Ride-Bold.otf"
@@ -921,11 +944,35 @@
             font-color="black"
             active-color="#D6B000"
             hover-color="#FFDF4D"
-            border-color="#000"
+            border-color="#FFD100"
             focus-color="#000"
             background-color="#FFD100"
             spot="linkto:#point10;spotgroup:group-point10;nextaudio:sound9;imagerotation:0 280 0"
-            position="0 -2.4 0"
+            position="-1.8 -2.4 0"
+          >
+          </a-gui-button>
+
+          <!-- Finish button -->
+          <a-gui-button
+            class="spots"
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            key-code="32"
+            value="Finish"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="white"
+            active-color="#18c313"
+            hover-color="#18e514"
+            border-color="#17d414"
+            focus-color="#000"
+            background-color="#17d414"
+            spot="linkto:#point10;spotgroup:group-point10;nextaudio:sound9;imagerotation:0 280 0"
+            position="1.8 -2.4 0"
           >
           </a-gui-button>
         </a-entity>
