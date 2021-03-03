@@ -13,23 +13,12 @@
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
 
     <script>
-      window.addEventListener(
-        "touchstart",
-        function () {
-          alert("this got called");
-          // create new buffer source for playback with an already
-          // loaded and decoded empty sound file
-          var source = myContext.createBufferSource();
-          source.buffer = myDecodedBuffer;
-
-          // connect to output (your speakers)
-          source.connect(myContext.destination);
-
-          // play the file
-          source.noteOn(0);
+      AFRAME.registerComponent("startaudio", {
+        init: function () {
+          // starts audio on iOS / Andriod
+          this.el.noteOn();
         },
-        false
-      );
+      });
 
       AFRAME.registerComponent("hotspots", {
         init: function () {
@@ -1009,6 +998,7 @@
 
       <!-- Voice over audio -->
       <a-entity
+        startaudio
         id="audio"
         visible="false"
         geometry="primitive: plane"
