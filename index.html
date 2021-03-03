@@ -17,6 +17,8 @@
         init: function () {
           // starts audio on iOS / Andriod
           this.el.noteOn(0);
+          var audio = new Audio("assets/audio/VO/onesecsilence.mp3");
+          audio.play();
         },
       });
 
