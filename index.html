@@ -30,12 +30,16 @@
 
     <script>
       function startvr() {
-        var startclick = new Audio(
-          "https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"
-        );
-        startclick.play();
-        //startclick.start ? startclick.start(0) : startclick.noteOn(0);
-        document.getElementById("loader").remove();
+        document
+          .getElementById("startvr")
+          .addEventListener("touchstart", function () {
+            var startclick = new Audio(
+              "https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"
+            );
+            startclick.play();
+            //startclick.start ? startclick.start(0) : startclick.noteOn(0);
+            document.getElementById("loader").remove();
+          });
       }
       // activate sound on mobile
       AFRAME.registerComponent(
@@ -111,7 +115,7 @@
   <body>
     <div id="loader">
       Loading Screen
-      <button onclick="startvr()">Start</button>
+      <button id="startvr">Start</button>
     </div>
     <a-scene
       click-handler
