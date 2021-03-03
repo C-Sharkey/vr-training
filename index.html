@@ -13,15 +13,29 @@
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
 
     <script>
-      AFRAME.registerComponent("startaudio", {
-        init: function () {
-          // starts audio on iOS / Andriod
-          this.el.noteOn(0);
-          var audio = new Audio("assets/audio/VO/onesecsilence.mp3");
-          audio.play();
-        },
-      });
+      // activate sound on mobile
+      AFRAME.registerComponent(
+        "click-handler",
+        {
+          init: function () {
+            const sceneEl = this.el.sceneEl;
+            const canvasEl = sceneEl.canvas;
+            canvasEl.addEventListener("touchstart", () => {
+              // create new buffer source for playback with an already
+              // loaded and decoded empty sound file
+              var source = myContext.createBufferSource();
+              source.buffer = myDecodedBuffer;
 
+              // connect to output (your speakers)
+              source.connect(myContext.destination);
+
+              // play the file
+              source.noteOn(0);
+            });
+          },
+        },
+        false
+      );
       AFRAME.registerComponent("hotspots", {
         init: function () {
           this.el.addEventListener("reloadspots", function (evt) {
@@ -72,6 +86,7 @@
   </head>
   <body>
     <a-scene
+      click-handler
       id="scene"
       loading-screen="dotsColor: yellow; backgroundColor: black"
       background="color:#ECECEC"
@@ -281,6 +296,14 @@
         Start Scene 
       ------------------------------------      
       -->
+      <!-- <a-plane
+        id="refresh"
+        class="startbutton"
+        position="0 0.7 -1"
+        scale="1 2 1"
+        rotation="0 0 0"
+        color="green"
+      ></a-plane> -->
 
       <!-- Button Wrapper -->
       <a-entity id="spots" hotspots position="0 2.5 -6" rotation="0 0 0">
@@ -1000,7 +1023,6 @@
 
       <!-- Voice over audio -->
       <a-entity
-        startaudio
         id="audio"
         visible="false"
         geometry="primitive: plane"
@@ -1014,7 +1036,7 @@
         <a-camera look-controls position="0 0 0">
           <a-gui-cursor
             id="cursor"
-            raycaster="objects: .spots"
+            raycaster="objects: .spots "
             fuse="true"
             fuse-timeout="2000"
             color="#ECEFF1"
@@ -1030,4 +1052,12 @@
       </a-entity>
     </a-scene>
   </body>
+  <!-- <script>
+    document.querySelector("#refresh").addEventListener("click", function () {
+      console.log("click");
+    });
+    window.addEvenListener("click", function () {
+      console.log("window click");
+    });
+  </script> -->
 </html>
