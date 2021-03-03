@@ -13,22 +13,18 @@
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
 
     <script>
-      window.addEventListener(
-        "touchstart",
-        function () {
-          // create empty buffer
-          var buffer = myContext.createBuffer(1, 1, 22050);
-          var source = myContext.createBufferSource();
-          source.buffer = buffer;
+      function startAudio() {
+        // create empty buffer
+        var buffer = myContext.createBuffer(1, 1, 22050);
+        var source = myContext.createBufferSource();
+        source.buffer = buffer;
 
-          // connect to output (your speakers)
-          source.connect(myContext.destination);
+        // connect to output (your speakers)
+        source.connect(myContext.destination);
 
-          // play the file
-          source.noteOn(0);
-        },
-        false
-      );
+        // play the file
+        source.noteOn(0);
+      }
 
       var isUnlocked = false;
       function unlock() {
@@ -347,6 +343,31 @@
             background-color="#FFD100"
             spot="linkto:#point2;spotgroup:group-point2;nextaudio:sound1;imagerotation:0 280 0"
             position="0 -2 0"
+          >
+          </a-gui-button>
+
+          <!-- Start Audio Button -->
+          <a-gui-button
+            class="spots"
+            width="2.5"
+            height="0.7"
+            base-depth="0.025"
+            depth="0.1"
+            gap="0.1"
+            onclick="startAudio()"
+            key-code="32"
+            value="Start audio"
+            font-family="assets/fonts/Ride-Bold.otf"
+            font-size="0.25"
+            margin="0 0 0.05 0"
+            font-color="black"
+            active-color="#D6B000"
+            hover-color="#FFDF4D"
+            border-color="#FFD100"
+            focus-color="#000"
+            background-color="#FFD100"
+            spot="linkto:#point2;spotgroup:group-point2;nextaudio:sound1;imagerotation:0 280 0"
+            position="4 -2 0"
           >
           </a-gui-button>
         </a-entity>
