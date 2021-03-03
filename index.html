@@ -2,6 +2,20 @@
   <head>
     <meta charset="utf-8" />
     <title>Hertz VR Training</title>
+
+    <style>
+      /* This only works with JavaScript, 
+         if it's not present, don't show loader */
+      #loader {
+        color: black;
+        background-color: aqua;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        z-index: 10000;
+      }
+    </style>
+
     <meta name="description" content="WebVR - Aframe - VR training at Hertz" />
     <meta name="author" content="Colin Sharkey - UX Designer & Developer" />
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
@@ -10,10 +24,14 @@
     <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
     <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>
+
     <!-- UI buttons / container -->
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
 
     <script>
+      function startvr() {
+        document.getElementById("loader").remove();
+      }
       // activate sound on mobile
       AFRAME.registerComponent(
         "click-handler",
@@ -86,6 +104,10 @@
     </script>
   </head>
   <body>
+    <div id="loader">
+      Loading Screen
+      <button onclick="startvr()">Start</button>
+    </div>
     <a-scene
       click-handler
       id="scene"
