@@ -30,6 +30,11 @@
 
     <script>
       function startvr() {
+        var startclick = new Audio(
+          "https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"
+        );
+        startclick.play();
+        //startclick.start ? startclick.start(0) : startclick.noteOn(0);
         document.getElementById("loader").remove();
       }
       // activate sound on mobile
