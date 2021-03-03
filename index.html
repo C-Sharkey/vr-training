@@ -9,6 +9,9 @@
     <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
     <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
     <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
+    <script>
+      src = "https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js";
+    </script>
     <!-- UI buttons / container -->
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
 
@@ -320,6 +323,7 @@
 
           <!-- Start Button -->
           <a-gui-button
+            sound="on: click; src: #click-sound"
             class="spots"
             width="2.5"
             height="0.7"
