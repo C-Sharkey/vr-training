@@ -29,41 +29,29 @@
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
 
     <script>
-      function startvr() {
-        document
-          .getElementById("startvr")
-          .addEventListener("touchstart", function () {
-            var startclick = new Audio(
-              "https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"
-            );
-            startclick.play();
-            //startclick.start ? startclick.start(0) : startclick.noteOn(0);
-            document.getElementById("loader").remove();
-          });
-      }
       // activate sound on mobile
-      AFRAME.registerComponent(
-        "click-handler",
-        {
-          init: function () {
-            const sceneEl = this.el.sceneEl;
-            const canvasEl = sceneEl.canvas;
-            canvasEl.addEventListener("touchstart", () => {
-              // create new buffer source for playback with an already
-              // loaded and decoded empty sound file
-              var source = myContext.createBufferSource();
-              source.buffer = myDecodedBuffer;
+      // AFRAME.registerComponent(
+      //   "click-handler",
+      //   {
+      //     init: function () {
+      //       const sceneEl = this.el.sceneEl;
+      //       const canvasEl = sceneEl.canvas;
+      //       canvasEl.addEventListener("touchstart", () => {
+      //         // create new buffer source for playback with an already
+      //         // loaded and decoded empty sound file
+      //         var source = myContext.createBufferSource();
+      //         source.buffer = myDecodedBuffer;
 
-              // connect to output (your speakers)
-              source.connect(myContext.destination);
+      //         // connect to output (your speakers)
+      //         source.connect(myContext.destination);
 
-              // play the file
-              source.noteOn(0);
-            });
-          },
-        },
-        false
-      );
+      //         // play the file
+      //         source.noteOn(0);
+      //       });
+      //     },
+      //   },
+      //   false
+      // );
       AFRAME.registerComponent("hotspots", {
         init: function () {
           this.el.addEventListener("reloadspots", function (evt) {
@@ -1085,12 +1073,27 @@
       </a-entity>
     </a-scene>
   </body>
-  <!-- <script>
-    document.querySelector("#refresh").addEventListener("click", function () {
-      console.log("click");
-    });
-    window.addEvenListener("click", function () {
-      console.log("window click");
-    });
-  </script> -->
+  <script>
+    const startbutton = document.getElementById("startvr");
+    const playsounds = () => {
+      var startclick = new Audio(
+        "https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"
+      );
+      startclick.play();
+      document.getElementById("loader").remove();
+    };
+
+    startbutton.addEventListener("touchstart", playsounds);
+    startbutton.addEventListener("click", playsounds);
+  </script>
 </html>
+
+<!-- 
+const soundEffect = new Audio();
+
+// onClick of first interaction on page before I need the sounds
+soundEffect.play();
+
+// later on when you actually want to play a sound at any point without user interaction
+soundEffect.src = 'path/to/file.mp3';
+soundEffect.play(); -->
