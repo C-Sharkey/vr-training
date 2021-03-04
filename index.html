@@ -29,29 +29,28 @@
     <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
 
     <script>
-      // activate sound on mobile
-      // AFRAME.registerComponent(
-      //   "click-handler",
-      //   {
-      //     init: function () {
-      //       const sceneEl = this.el.sceneEl;
-      //       const canvasEl = sceneEl.canvas;
-      //       canvasEl.addEventListener("touchstart", () => {
-      //         // create new buffer source for playback with an already
-      //         // loaded and decoded empty sound file
-      //         var source = myContext.createBufferSource();
-      //         source.buffer = myDecodedBuffer;
+      document.addEventListener("DOMContentLoaded", (event) => {
+        //the event occurred
 
-      //         // connect to output (your speakers)
-      //         source.connect(myContext.destination);
-
-      //         // play the file
-      //         source.noteOn(0);
-      //       });
-      //     },
-      //   },
-      //   false
-      // );
+        const startbutton = document.getElementById("startvr");
+        console.log("button: ", startbutton);
+        const sounds = document.getElementById("audio");
+        console.log("sound: ", sounds);
+        const loadscreen = document.getElementById("loader");
+        console.log("loadscreen: ", loadscreen);
+        startbutton.addEventListener("touchstart", () => {
+          playsounds(sounds, loadscreen);
+        });
+        startbutton.addEventListener("click", () => {
+          playsounds(sounds, loadscreen);
+        });
+        function playsounds(sound, loadscreen) {
+          console.log("clicked...........");
+          var startclick = new Audio(sound);
+          startclick.play();
+          loadscreen.remove();
+        }
+      });
       AFRAME.registerComponent("hotspots", {
         init: function () {
           this.el.addEventListener("reloadspots", function (evt) {
@@ -1087,13 +1086,3 @@
     startbutton.addEventListener("click", playsounds);
   </script>
 </html>
-
-<!-- 
-const soundEffect = new Audio();
-
-// onClick of first interaction on page before I need the sounds
-soundEffect.play();
-
-// later on when you actually want to play a sound at any point without user interaction
-soundEffect.src = 'path/to/file.mp3';
-soundEffect.play(); -->
