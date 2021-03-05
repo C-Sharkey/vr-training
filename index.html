@@ -4,15 +4,41 @@
     <title>Hertz VR Training</title>
 
     <style>
-      /* This only works with JavaScript, 
-         if it's not present, don't show loader */
-      #loader {
-        color: black;
-        background-color: aqua;
+      .mainUI {
+        border: 0px solid pink;
         position: fixed;
-        width: 100vw;
-        height: 100vh;
-        z-index: 10000;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none; /* allow click-through in transparent areas */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .regionUI {
+        border: none;
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        pointer-events: none;
+      }
+
+      .buttonUI {
+        border: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        pointer-events: auto;
+        filter: drop-shadow(0px 0px 20px white);
+      }
+
+      #buttonEnter {
+        font-size: 34px;
+        background: yellowgreen;
+        color: black;
+        padding: 20px 100px;
       }
     </style>
 
@@ -32,25 +58,44 @@
       document.addEventListener("DOMContentLoaded", (event) => {
         //the event occurred
 
-        const startbutton = document.getElementById("startvr");
-        console.log("button: ", startbutton);
-        const sounds = document.getElementById("audio");
-        console.log("sound: ", sounds);
-        const loadscreen = document.getElementById("loader");
-        console.log("loadscreen: ", loadscreen);
-        startbutton.addEventListener("touchstart", () => {
-          playsounds(sounds, loadscreen);
-        });
-        startbutton.addEventListener("click", () => {
-          playsounds(sounds, loadscreen);
-        });
-        function playsounds(sound, loadscreen) {
-          console.log("clicked...........");
-          var startclick = new Audio(sound);
-          startclick.play();
-          loadscreen.remove();
-        }
+        console.log("dom loaded...");
       });
+
+      AFRAME.registerComponent("startscene", {
+        init: function () {
+          // block pointer events until buttonEnter is clicked
+          let uiDiv = document.getElementById("uiDiv");
+          uiDiv.style["pointer-events"] = "auto";
+
+          // set up background blocker
+          uiDiv.style["background-color"] = "rgba(0, 0, 0, 0.75)";
+
+          // indicate clickable with hand cursor (desktop)
+          let buttonEnter = document.getElementById("buttonEnter");
+          buttonEnter.style.cursor = "pointer";
+
+          let fadeIn = function () {
+            // allow point events again
+            uiDiv.style["pointer-events"] = "none";
+
+            // sounds can only be triggered after a mouse interaction
+
+            const soundPlayer = document.querySelector("#audio");
+            soundPlayer.components.sound.playSound();
+
+            // remove startButton
+            buttonEnter.parentNode.remove(buttonEnter);
+
+            // fade out uiDiv background
+            uiDiv.style["background-color"] = "rgba(0, 0, 0, 0.0)";
+            uiDiv.style["transition"] = "background-color 1000ms linear";
+          };
+          // activate for desktop/touchscreen
+          buttonEnter.addEventListener("touchstart", fadeIn);
+          buttonEnter.addEventListener("mousedown", fadeIn);
+        },
+      });
+
       AFRAME.registerComponent("hotspots", {
         init: function () {
           this.el.addEventListener("reloadspots", function (evt) {
@@ -100,18 +145,30 @@
     </script>
   </head>
   <body>
-    <div id="loader">
-      Loading Screen
-      <button id="startvr">Start</button>
+    <div class="mainUI" id="uiDiv" oncontextmenu="return false;">
+      <!-- centered -->
+      <div class="regionUI">
+        <div class="buttonUI">
+          <button id="buttonEnter">Start</button>
+        </div>
+      </div>
     </div>
+
     <a-scene
-      click-handler
+      startscene
       id="scene"
       loading-screen="dotsColor: yellow; backgroundColor: black"
       background="color:#ECECEC"
     >
       <a-assets>
-        <!-- Mock assets -->
+        <!-- ios audio workaround -->
+        <audio
+          preload="auto"
+          id="silence"
+          crossorigin="anonymous"
+          src="assets/audio/VO/onesecsilence.mp3"
+        ></audio>
+        <!-- Audio files -->
         <audio
           preload="auto"
           id="click-sound"
@@ -339,7 +396,6 @@
 
           <!-- Start Button -->
           <a-gui-button
-            sound="on: click; src: #click-sound"
             class="spots"
             width="2.5"
             height="0.7"
@@ -1045,10 +1101,8 @@
       <a-entity
         id="audio"
         visible="false"
-        geometry="primitive: plane"
-        material="color: #ffffff"
         position="0.68894 0 -0.4605"
-        sound=""
+        sound="src: #silence"
       ></a-entity>
 
       <!-- Camera + cursor. -->
@@ -1072,17 +1126,4 @@
       </a-entity>
     </a-scene>
   </body>
-  <script>
-    const startbutton = document.getElementById("startvr");
-    const playsounds = () => {
-      var startclick = new Audio(
-        "https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"
-      );
-      startclick.play();
-      document.getElementById("loader").remove();
-    };
-
-    startbutton.addEventListener("touchstart", playsounds);
-    startbutton.addEventListener("click", playsounds);
-  </script>
 </html>
