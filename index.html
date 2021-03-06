@@ -352,7 +352,7 @@
         function closebutton() {
           var closebutton = document.createElement("a-plane");
           document.querySelector("a-scene").appendChild(closebutton);
-          closebutton.setAttribute("id", "closebutton");
+          closebutton.setAttribute("id", "closeicon");
           closebutton.setAttribute("position", "2.5 4 -5.9");
           closebutton.setAttribute("scale", "0.5 0.5 0");
           closebutton.setAttribute("rotation", "0 0 0");
@@ -380,6 +380,20 @@
               enablebuttons(button, audiotime);
             }
           });
+          // Check for open info panel
+          (function () {
+            const openpanel = document.getElementById("infopanel");
+            console.log("panel is open: ", openpanel);
+            const openclosebutton = document.getElementById("closeicon");
+            console.log("closebutton is open: ", openclosebutton);
+
+            if (openpanel) {
+              openpanel.remove();
+            }
+            if (openclosebutton) {
+              openclosebutton.remove();
+            }
+          })();
         }
         const enablebuttons = (button, audiotime) => {
           setTimeout((audiotime) => {
