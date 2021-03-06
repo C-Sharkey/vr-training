@@ -1,11 +1,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Hertz VR Training</title>
+    <title>Hertz VR COVID Training</title>
 
     <style>
       .mainUI {
-        border: 0px solid pink;
         position: fixed;
         top: 0px;
         width: 100%;
@@ -36,9 +35,17 @@
 
       #buttonEnter {
         font-size: 34px;
-        background: yellowgreen;
+        background: #ffd100;
         color: black;
         padding: 20px 100px;
+      }
+
+      #loadingText {
+        font-size: 34px;
+        color: #ffd100;
+        font-family: Helvetica, arial, sans-serif;
+        text-align: center;
+        padding-bottom: 100px;
       }
     </style>
 
@@ -68,11 +75,11 @@
           uiDiv.style["pointer-events"] = "auto";
 
           // set up background blocker
-          uiDiv.style["background-color"] = "rgba(0, 0, 0, 0.75)";
+          uiDiv.style["background-color"] = "rgba(0, 0, 0, 0.8)";
 
           // indicate clickable with hand cursor (desktop)
-          let buttonEnter = document.getElementById("buttonEnter");
-          buttonEnter.style.cursor = "pointer";
+          // let buttonEnter = document.getElementById("buttonEnter");
+          // buttonEnter.style.cursor = "pointer";
 
           let fadeIn = function () {
             // allow point events again
@@ -90,9 +97,23 @@
             uiDiv.style["background-color"] = "rgba(0, 0, 0, 0.0)";
             uiDiv.style["transition"] = "background-color 1000ms linear";
           };
-          // activate for desktop/touchscreen
-          buttonEnter.addEventListener("touchstart", fadeIn);
-          buttonEnter.addEventListener("mousedown", fadeIn);
+
+          setTimeout(() => {
+            // Create Start button
+            const startbtn = document.createElement("button");
+            const buttontext = document.createTextNode("Start");
+            startbtn.setAttribute("id", "buttonEnter");
+            startbtn.appendChild(buttontext);
+            document.getElementById("uiDiv").appendChild(startbtn);
+
+            // Remove loading
+            const loading = document.getElementById("loadingText");
+            loading.remove();
+
+            // activate for desktop/touchscreen
+            buttonEnter.addEventListener("touchstart", fadeIn);
+            buttonEnter.addEventListener("mousedown", fadeIn);
+          }, 4000);
         },
       });
 
@@ -149,7 +170,8 @@
       <!-- centered -->
       <div class="regionUI">
         <div class="buttonUI">
-          <button id="buttonEnter">Start</button>
+          <p id="loadingText">Loading</p>
+          <!-- <button id="buttonEnter">Start</button> -->
         </div>
       </div>
     </div>
@@ -157,10 +179,10 @@
     <a-scene
       startscene
       id="scene"
-      loading-screen="dotsColor: yellow; backgroundColor: black"
+      loading-screen="dotsColor: #ffd100; backgroundColor: black"
       background="color:#ECECEC"
     >
-      <a-assets>
+      <a-assets timeout="18000">
         <!-- ios audio workaround -->
         <audio
           preload="auto"
@@ -372,14 +394,6 @@
         Start Scene 
       ------------------------------------      
       -->
-      <!-- <a-plane
-        id="refresh"
-        class="startbutton"
-        position="0 0.7 -1"
-        scale="1 2 1"
-        rotation="0 0 0"
-        color="green"
-      ></a-plane> -->
 
       <!-- Button Wrapper -->
       <a-entity id="spots" hotspots position="0 2.5 -6" rotation="0 0 0">
@@ -1120,8 +1134,8 @@
           >
             <!-- dot, ring, reticle, cross  -->
           </a-gui-cursor>
-          <!-- /cursor -->
         </a-camera>
+
         <!-- /camera -->
       </a-entity>
     </a-scene>
