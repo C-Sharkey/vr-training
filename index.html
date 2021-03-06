@@ -436,6 +436,12 @@
 
         <!-- Scene 1 - Welcome -->
         <a-entity id="group-point2" scale="0 0 0">
+          <a-entity
+            text="value: Step 1 of 9;"
+            color="white"
+            position="4 -3 0.1"
+            scale="7 7 1"
+          ></a-entity>
           <!-- Next button -->
           <a-gui-button
             class="spots next"
@@ -465,6 +471,12 @@
 
         <!-- Scene 2 - Changes -->
         <a-entity id="group-point3" scale="0 0 0">
+          <a-entity
+            text="value: Step 2 of 9;"
+            color="white"
+            position="1.7 -3 0.1"
+            scale="7 7 1"
+          ></a-entity>
           <!-- Info Button -->
           <a-gui-button
             class="spots infobutton"
@@ -542,7 +554,13 @@
         <!-- End Scene 2 -->
 
         <!-- Scene 3 - Hand Sanitiser -->
-        <a-entity id="group-point4" scale="0 0 0">
+        <a-entity id="group-point4" scale="0 0 0" position="0 -1 0">
+          <a-entity
+            text="value: Step 3 of 9;"
+            color="white"
+            position="1.7 -3 0.1"
+            scale="7 7 1"
+          ></a-entity>
           <!-- Info Button -->
           <a-gui-button
             class="spots infobutton"
@@ -620,7 +638,13 @@
         <!-- End Scene 3 -->
 
         <!-- Scene 4 - Stairs/Left  -->
-        <a-entity id="group-point5" scale="0 0 0">
+        <a-entity id="group-point5" scale="0 0 0" position="0 -1 0">
+          <a-entity
+            text="value: Step 4 of 9;"
+            color="white"
+            position="1.7 -3 0.1"
+            scale="7 7 1"
+          ></a-entity>
           <!-- Info Button -->
           <a-gui-button
             class="spots infobutton"
@@ -698,7 +722,13 @@
         <!-- End Scene 4 -->
 
         <!-- Scene 5 - Canteen -->
-        <a-entity id="group-point6" scale="0 0 0">
+        <a-entity id="group-point6" scale="0 0 0" position="0 -1 0">
+          <a-entity
+            text="value: Step 5 of 9;"
+            color="white"
+            position="2.8 -3 0.1"
+            scale="7 7 1"
+          ></a-entity>
           <!-- Back Button -->
           <a-gui-button
             class="spots back"
@@ -752,7 +782,13 @@
         <!-- End Scene 5 -->
 
         <!-- Scene 6 - Tables -->
-        <a-entity id="group-point7" scale="0 0 0">
+        <a-entity id="group-point7" scale="0 0 0" position="0 -1 0">
+          <a-entity
+            text="value: Step 6 of 9;"
+            color="white"
+            position="2.8 -3 0.1"
+            scale="7 7 1"
+          ></a-entity>
           <!-- Back button -->
           <a-gui-button
             class="spots back"
@@ -806,7 +842,13 @@
         <!-- End Scene 6 -->
 
         <!-- Scene 7 - Social/Face covering -->
-        <a-entity id="group-point8" scale="0 0 0">
+        <a-entity id="group-point8" scale="0 0 0" position="0 -1 0">
+          <a-entity
+            text="value: Step 7 of 9;"
+            color="white"
+            position="1.7 -3 0.1"
+            scale="7 7 1"
+          ></a-entity>
           <!-- Info Button -->
           <a-gui-button
             class="spots infobutton"
@@ -884,7 +926,13 @@
         <!-- End Scene 7 -->
 
         <!-- Scene 8 - Cleaning -->
-        <a-entity id="group-point9" scale="0 0 0">
+        <a-entity id="group-point9" scale="0 0 0" position="0 -1 0">
+          <a-entity
+            text="value: Step 8 of 9;"
+            color="white"
+            position="1.7 -3 0.1"
+            scale="7 7 1"
+          ></a-entity>
           <!-- Info Button -->
           <a-gui-button
             class="spots infobutton"
@@ -963,6 +1011,12 @@
 
         <!-- Scene 9 - Updates -->
         <a-entity id="group-point10" scale="0 0 0">
+          <a-entity
+            text="value: Step 9 of 9;"
+            color="white"
+            position="1.7 -3 0.1"
+            scale="7 7 1"
+          ></a-entity>
           <!-- Info Button -->
           <a-gui-button
             class="spots infobutton"
@@ -1012,7 +1066,7 @@
           >
           </a-gui-button>
 
-          <!-- Next Button -->
+          <!-- Finish Button -->
           <a-gui-button
             class="spots next"
             width="2.5"
@@ -1021,16 +1075,16 @@
             depth="0.1"
             gap="0.1"
             key-code="32"
-            value="Next"
+            value="Finish"
             font-family="assets/fonts/Ride-Bold.otf"
             font-size="0.25"
             margin="0 0 0.05 0"
             font-color="black"
             active-color="#D6B000"
-            hover-color="#FFDF4D"
-            border-color="#FFD100"
+            hover-color="#7aff78"
+            border-color="#32c730"
             focus-color="#000"
-            background-color="#FFD100"
+            background-color="#32c730"
             spot="linkto:#point11;spotgroup:group-point11;nextaudio:;imagerotation:0 280 0"
             position="1.8 -2.4 0"
           >
@@ -1048,55 +1102,6 @@
             rotation="0 0 0"
             src="#popup-finished"
           ></a-plane>
-
-          <!-- Back button -->
-          <a-gui-button
-            class="spots"
-            width="2.5"
-            height="0.7"
-            base-depth="0.025"
-            depth="0.1"
-            gap="0.1"
-            onclick="disablebuttons(20000)"
-            key-code="32"
-            value="Back"
-            font-family="assets/fonts/Ride-Bold.otf"
-            font-size="0.25"
-            margin="0 0 0.05 0"
-            font-color="black"
-            active-color="#D6B000"
-            hover-color="#FFDF4D"
-            border-color="#FFD100"
-            focus-color="#000"
-            background-color="#FFD100"
-            spot="linkto:#point10;spotgroup:group-point10;nextaudio:sound9;imagerotation:0 280 0"
-            position="-1.8 -2.4 0"
-          >
-          </a-gui-button>
-
-          <!-- Finish button -->
-          <a-gui-button
-            class="spots"
-            width="2.5"
-            height="0.7"
-            base-depth="0.025"
-            depth="0.1"
-            gap="0.1"
-            key-code="32"
-            value="Finish"
-            font-family="assets/fonts/Ride-Bold.otf"
-            font-size="0.25"
-            margin="0 0 0.05 0"
-            font-color="white"
-            active-color="#18c313"
-            hover-color="#18e514"
-            border-color="#17d414"
-            focus-color="#000"
-            background-color="#17d414"
-            spot="linkto:#point10;spotgroup:group-point10;nextaudio:sound9;imagerotation:0 280 0"
-            position="1.8 -2.4 0"
-          >
-          </a-gui-button>
         </a-entity>
         <!-- End Scene 10 -->
 
