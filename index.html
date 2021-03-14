@@ -182,7 +182,7 @@
       loading-screen="dotsColor: #ffd100; backgroundColor: black"
       background="color:#ECECEC"
     >
-      <a-assets timeout="60000">
+      <a-assets timeout="30000">
         <!-- ios audio workaround -->
         <audio
           preload="auto"
@@ -201,63 +201,63 @@
         <audio
           preload="auto"
           id="sound1"
-          src="assets/audio/VO/VO1-welcome.wav"
+          src="assets/audio/VO/VO1-welcome.mp3"
           preload="auto"
         ></audio>
 
         <audio
           preload="auto"
           id="sound2"
-          src="assets/audio/VO/VO2-changes.wav"
+          src="assets/audio/VO/VO2-changes.mp3"
           preload="auto"
         ></audio>
 
         <audio
           preload="auto"
           id="sound3"
-          src="assets/audio/VO/VO3-handsan.wav"
+          src="assets/audio/VO/VO3-handsan.mp3"
           preload="auto"
         ></audio>
 
         <audio
           preload="auto"
           id="sound4"
-          src="assets/audio/VO/VO4-stairs.wav"
+          src="assets/audio/VO/VO4-stairs.mp3"
           preload="auto"
         ></audio>
 
         <audio
           preload="auto"
           id="sound5"
-          src="assets/audio/VO/VO5-canteen.wav"
+          src="assets/audio/VO/VO5-canteen.mp3"
           preload="auto"
         ></audio>
 
         <audio
           preload="auto"
           id="sound6"
-          src="assets/audio/VO/VO6-tables.wav"
+          src="assets/audio/VO/VO6-tables.mp3"
           preload="auto"
         ></audio>
 
         <audio
           preload="auto"
           id="sound7"
-          src="assets/audio/VO/VO7-social.wav"
+          src="assets/audio/VO/VO7-social.mp3"
           preload="auto"
         ></audio>
 
         <audio
           preload="auto"
           id="sound8"
-          src="assets/audio/VO/VO8-cleaning.wav"
+          src="assets/audio/VO/VO8-cleaning.mp3"
           preload="auto"
         ></audio>
 
         <audio
           preload="auto"
           id="sound9"
-          src="assets/audio/VO/VO9-updates.wav"
+          src="assets/audio/VO/VO9-updates.mp3"
           preload="auto"
         ></audio>
 
@@ -1092,9 +1092,10 @@
             value="Finish"
             font-family="assets/fonts/Ride-Bold.otf"
             font-size="0.25"
+            onclick="disablebuttons(1000)"
             margin="0 0 0.05 0"
             font-color="black"
-            active-color="#D6B000"
+            active-color="#00d607"
             hover-color="#7aff78"
             border-color="#32c730"
             focus-color="#000"
